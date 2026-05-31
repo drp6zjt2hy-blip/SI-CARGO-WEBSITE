@@ -911,15 +911,23 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label>Client Phone</label>
-            <input type="text" id="add_phone" placeholder="+256756864623">
-          </div>
-          <div class="form-group">
-            <label>Origin (China)</label>
-            <input type="text" id="add_origin" placeholder="e.g. Foshan">
-          </div>
-        </div>
+  <div class="form-group">
+    <label>Client Phone</label>
+    <input type="text" id="add_phone" placeholder="+256756864623">
+  </div>
+
+  <div class="form-group">
+    <label>Container Number</label>
+    <input type="text" id="add_container_number" placeholder="e.g. MSKU1234567">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group">
+    <label>Origin (China)</label>
+    <input type="text" id="add_origin" placeholder="e.g. Foshan">
+  </div>
+</div>
         <div class="form-group">
           <label>Cargo Description *</label>
           <input type="text" id="add_desc" placeholder="e.g. Electronics, Clothing, Machinery">
@@ -1004,10 +1012,16 @@
 
         <div id="updateForm" style="display:none;border-top:1px solid var(--border);padding-top:28px;margin-top:8px;">
           <div class="form-row">
-            <div class="form-group">
-              <label>Client Name</label>
-              <input type="text" id="upd_client" disabled>
-            </div>
+  <div class="form-group">
+    <label>Client Name</label>
+    <input type="text" id="upd_client" disabled>
+  </div>
+
+  <div class="form-group">
+    <label>Container Number</label>
+    <input type="text" id="upd_container_number">
+  </div>
+</div>
             <div class="form-group">
               <label>Cargo Description</label>
               <input type="text" id="upd_desc" disabled>
@@ -1082,6 +1096,7 @@
             <thead>
               <tr>
                 <th>Tracking #</th>
+                <th>Container #</th>
                 <th>Client</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -1252,6 +1267,7 @@
       tracking_number: tracking,
       client_name: client,
       phone: document.getElementById('add_phone').value.trim(),
+      container_number: document.getElementById('add_container_number').value.trim(),
       origin: document.getElementById('add_origin').value.trim(),
       cargo_description: desc,
       destination: document.getElementById('add_dest').value.trim(),
@@ -1272,7 +1288,7 @@
         showAlert(alert, 'success', `✅ Shipment ${tracking} added successfully!`);
         btn.textContent = 'Add Shipment →';
         btn.disabled = false;
-        ['add_tracking','add_client','add_phone','add_origin','add_desc','add_dest','add_location','add_notes','add_weight_kg','add_NO_CBM','add_no_of_packages','add_eta_mombasa','add_eta_icd'].forEach(id => { document.getElementById(id).value = ''; });
+        ['add_tracking','add_client','add_phone','add_origin','add_desc','add_dest','add_location','add_notes','add_weight_kg','add_NO_CBM','add_no_of_packages','add_eta_mombasa','add_container_number','add_eta_icd'].forEach(id => { document.getElementById(id).value = ''; });
         loadShipments();
       } else {
         showAlert(alert, 'error', 'Error adding shipment. Try again.');
@@ -1297,6 +1313,8 @@
         const s = result[0];
         document.getElementById('upd_id').value = s.id || '';
         document.getElementById('upd_client').value = s.client_name;
+        document.getElementById('upd_container_number').value =
+    s.container_number || '';
         document.getElementById('upd_desc').value = s.cargo_description;
         document.getElementById('upd_status').value = s.status;
         document.getElementById('upd_location').value = s.location || '';
@@ -1323,20 +1341,21 @@
     const data = {
       eta_mombasa: document.getElementById('upd_eta_mombasa').value.trim(),
       eta_icd: document.getElementById('upd_eta_icd').value.trim(),
+      container_number: document.getElementById('upd_container_number').value.trim() || null,
       status: document.getElementById('upd_status').value,
       location: document.getElementById('upd_location').value.trim(),
       notes: document.getElementById('upd_notes').value.trim(),
       last_updated: new Date().toISOString(),
       weight_kg: document.getElementById('upd_weight_kg').value.trim() || null,
       NO_CBM: document.getElementById('upd_NO_CBM').value.trim() || null,
-      no_of_packages: document.getElementById('upd_no_of_packages').value.trim() || null,
+      no_of_packages: document.getElementById('upd_no_of_packages').value.trim() || null, 
     };
     try {
       await supabase('PATCH', 'TRACKING', data, `tracking_number=eq.${tracking}`);
       showAlert(alert, 'success', '✅ Status updated successfully!');
       document.getElementById('updateForm').style.display = 'none';
       document.getElementById('upd_tracking').value = '';
-      ['upd_client','upd_desc','upd_location','upd_notes','upd_weight_kg','upd_NO_CBM','upd_no_of_packages','upd_eta_mombasa','upd_eta_icd'].forEach(id => { document.getElementById(id).value = ''; });
+      ['upd_client','upd_desc','upd_location','upd_notes','upd_weight_kg','upd_NO_CBM','upd_no_of_packages','upd_eta_mombasa','upd_eta_icd','upd_container_number'].forEach(id => { document.getElementById(id).value = ''; });
       setTimeout(() => loadShipments(), 500);
     } catch(e) {
       console.error('Update error:', e);
@@ -1373,7 +1392,10 @@
     }
     tbody.innerHTML = data.map(s => `
       <tr>
-        <td><strong>${s.tracking_number}</strong></td>
+         <td><strong>${s.tracking_number}</strong></td>
+        <td>
+        ${s.container_number || '—'}
+        </td>
         <td>${s.client_name}</td>
         <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${s.cargo_description}</td>
         <td>${getStatusBadge(s.status)}</td>
