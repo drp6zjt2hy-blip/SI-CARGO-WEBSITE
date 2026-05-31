@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — SI CARGO UGANDA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 50px;
+    }
+    .mission-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px 26px;
+      border: 1px solid var(--gray-200);
+      text-align: center;
+      transition: var(--transition);
+    }
+    .mission-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .mc-icon { font-size: 40px; margin-bottom: 16px; }
+    .mission-card h3 { font-size: 18px; color: var(--gray-900); margin-bottom: 10px; }
+    .mission-card p { font-size: 14.5px; color: var(--gray-600); line-height: 1.75; }
+
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 28px;
+  margin-top: 50px;
+}
+.team-card {
+  text-align: center;
+}
+.team-avatar {
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 24px rgba(249,115,22,0.35);
+}
+.team-card h4 { font-size: 17px; color: var(--gray-900); margin-bottom: 4px; }
+.team-card p { font-size: 13.5px; color: var(--gray-500); }
+
+.stats-row {
+  background: var(--orange);
+  padding: 60px 6%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+.stat-box { color: white; }
+.stat-box .num { font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800; display: block; }
+.stat-box .label { font-size: 14px; opacity: 0.8; }
+
+
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<script src="js/layout.js"></script>
+
+
+<main>
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>About Us</span>
+      </div>
+      <h1>About SI CARGO UGANDA</h1>
+      <p>Your trusted logistics partner for cargo from China to Uganda.</p>
+    </div>
+  </div>
+
+  <!-- ABOUT DETAIL -->
+
+  <section class="section">
+    <div class="about-layout">
+      <div class="about-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop" alt="SI Cargo Uganda warehouse operations">
+        <div class="about-img-badge">
+          <span class="big">3+</span>
+          <span class="small">Years of Service</span>
+        </div>
+      </div>
+
+
+  <div class="about-text reveal">
+    <span class="section-tag">Our Story</span>
+    <h2>Built for Ugandan Importers</h2>
+    <p>
+      SI CARGO UGANDA was founded with a single purpose: to make importing from China simple, affordable, and stress-free for Ugandan businesses and individuals. We noticed that many Ugandans faced challenges with unreliable freight agents, hidden charges, and cargo delays — and we decided to fix that.
+    </p>
+    <p>
+      Today, we are one of Uganda's growing cargo specialists, operating a warehouse in China and a delivery hub in Kampala. From single packages to full container loads, we handle it all.
+    </p>
+    <ul class="about-bullets">
+      <li>Licensed customs clearing agents in Uganda</li>
+      <li>Bonded warehouse facility in China</li>
+      <li>Transparent, all-inclusive pricing</li>
+      <li>Dedicated account managers for each client</li>
+      <li>WhatsApp & phone support 6 days a week</li>
+    </ul>
+    
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- STATS ROW -->
+
+  <div class="stats-row">
+    <div class="stat-box reveal">
+      <span class="num" data-count="500" data-suffix="+">500+</span>
+      <span class="label">Happy Clients</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="num" data-count="3" data-suffix=" Yrs">3 Yrs</span>
+      <span class="label">In Business</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="num" data-count="98" data-suffix="%">98%</span>
+      <span class="label">On-time Rate</span>
+    </div>
+    <div class="stat-box reveal">
+      <span class="num" data-count="2000" data-suffix="+">2000+</span>
+      <span class="label">Shipments Handled</span>
+    </div>
+  </div>
+
+  <!-- MISSION/VALUES -->
+
+  <section class="section section-alt">
+    <div class="section-title centered reveal">
+      <span class="section-tag">Our Values</span>
+      <h2>What Drives Us</h2>
+      <p>Every decision at SI CARGO UGANDA is guided by four core principles.</p>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-card reveal">
+        <div class="mc-icon">🎯</div>
+        <h3>Reliability</h3>
+        <p>We deliver on our commitments — your cargo arrives on time, every time, with no surprises.</p>
+      </div>
+      <div class="mission-card reveal">
+        <div class="mc-icon">💡</div>
+        <h3>Transparency</h3>
+        <p>No hidden fees. No surprises. You know exactly what you're paying and why at every step.</p>
+      </div>
+      <div class="mission-card reveal">
+        <div class="mc-icon">🤝</div>
+        <h3>Partnership</h3>
+        <p>We treat every client as a long-term partner, not a transaction. Your growth is our success.</p>
+      </div>
+      <div class="mission-card reveal">
+        <div class="mc-icon">⚡</div>
+        <h3>Efficiency</h3>
+        <p>Streamlined processes, fast customs clearance, and proactive communication reduce delays.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+
+  <section class="section" style="text-align:center;">
+    <span class="section-tag">Get Started</span>
+    <h2 style="font-size:clamp(28px,4vw,44px);max-width:600px;margin:0 auto 16px;">Ready to Work With Us?</h2>
+    <p style="color:var(--gray-600);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;">Register your cargo today or reach out to our team for a custom quote and consultation.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+  <a href="tracking.html" class="btn btn-primary">Track Your Cargo</a>
+  <a href="contact.html" class="btn btn-dark">Contact Us</a>
+</div>
+
+  </section>
+</main>
+
+<div id="foot-placeholder"></div>
+
+
+
+<script src="js/main.js"></script>
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script>
+  // Keep active nav link based on current page
+  var currentFile = window.location.pathname.split('/').pop();
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href === currentFile) {
+      link.classList.add('active');
+    }
+    if (currentFile === '' || currentFile === 'index.html') {
+      if (href === 'index.html') {
+        link.classList.add('active');
+      }
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.querySelector('.hamburger');
+    var navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+        var isOpen = navLinks.classList.contains('open');
+        var spans = hamburger.querySelectorAll('span');
+        if (isOpen) {
+          spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+        } else {
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Cargo — SI CARGO UGANDA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .track-hero {
+      background: linear-gradient(135deg, var(--charcoal), #1c1c1e);
+      padding: 60px 6% 70px;
+      text-align: center;
+    }
+    .track-hero h2 { font-size: clamp(30px,4vw,50px); color: white; margin-bottom: 12px; }
+    .track-hero p { color: rgba(255,255,255,0.6); margin-bottom: 36px; font-size: 16px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+
+.big-track-form {
+  max-width: 640px;
+  margin: 0 auto 30px;
+  display: flex;
+  gap: 12px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+  padding: 10px 10px 10px 26px;
+}
+.big-track-form input {
+  flex: 1;
+  background: none; border: none; outline: none;
+  color: white; font-size: 17px;
+  font-family: 'DM Sans', sans-serif;
+}
+.big-track-form input::placeholder { color: rgba(255,255,255,0.35); }
+
+.track-result-box {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 15px;
+}
+.track-result-box .info-box {
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 12px;
+  padding: 18px 22px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+  display: none;
+}
+.track-result-box .error-box {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 12px;
+  padding: 18px 22px;
+  color: #FCA5A5;
+  line-height: 1.7;
+  display: none;
+}
+
+.track-how {
+  padding: 70px 6%;
+  background: var(--white);
+}
+.track-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.ts {
+  text-align: center;
+  padding: 28px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+}
+.ts:hover { box-shadow: var(--shadow); border-color: rgba(249,115,22,0.3); }
+.ts .ts-icon { font-size: 40px; margin-bottom: 14px; }
+.ts h3 { font-size: 16px; color: var(--gray-900); margin-bottom: 8px; }
+.ts p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+
+.contact-cta {
+  background: var(--off-white);
+  padding: 70px 6%;
+  text-align: center;
+}
+.contact-cta h2 { font-size: 32px; color: var(--gray-900); margin-bottom: 10px; }
+.contact-cta p { color: var(--gray-600); margin-bottom: 28px; }
+
+.track-result {
+  margin-top: 20px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 15px;
+  display: none;
+}
+.track-result.info {
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.3);
+  color: rgba(255,255,255,0.85);
+}
+.track-result.error {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #FCA5A5;
+}
+
+
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main>
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Cargo Tracking</span>
+      </div>
+      <h1>Track Your Cargo</h1>
+      <p>Get real-time updates on your shipment from China to Uganda.</p>
+    </div>
+  </div>
+
+  <section class="section tracking-section">
+  <div class="tracking-inner">
+    <span class="section-tag" style="color:var(--orange-light)">Live Updates</span>
+    <h2>Track Your Cargo</h2>
+    <p>Enter your tracking number to get the latest status on your shipment.</p>
+    <div class="track-form">
+      <input type="text" id="trackInput" placeholder="e.g. 0000034">
+      <button class="btn btn-primary" id="trackBtn">Track Now</button>
+    </div>
+    <div id="trackResult"></div>
+    <div class="tracking-features">
+      <div class="tf"><div class="icon">📍</div> Location Updates</div>
+      <div class="tf"><div class="icon">📅</div> ETA Estimates</div>
+      <div class="tf"><div class="icon">📞</div> +256756864623</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKING RESULT DISPLAY -->
+<section class="section section-white" id="trackingResultSection" style="display:none;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div id="cargoResult"></div>
+  </div>
+</section>
+
+  <section class="track-how">
+    <div class="section-title centered reveal">
+      <span class="section-tag">How Tracking Works</span>
+      <h2>Stay Updated Every Step of the Way</h2>
+    </div>
+    <div class="track-steps">
+      <div class="ts reveal">
+        <div class="ts-icon">📦</div>
+        <h3>Cargo Received</h3>
+        <p>We confirm receipt of your goods at our China warehouse and assign a tracking number.</p>
+      </div>
+      <div class="ts reveal">
+        <div class="ts-icon">🔄</div>
+        <h3>In Transit</h3>
+        <p>Your cargo is on its way — by air or sea. Track progress and estimated arrival date.</p>
+      </div>
+      <div class="ts reveal">
+        <div class="ts-icon">🛃</div>
+        <h3>Customs Clearance</h3>
+        <p>We notify you when goods arrive in Uganda and keep you updated on customs processing.</p>
+      </div>
+      <div class="ts reveal">
+        <div class="ts-icon">✅</div>
+        <h3>Ready for Pickup / Delivery</h3>
+        <p>Once cleared, your cargo is ready for collection in Kampala or delivery to your address.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-cta">
+    <h2>Need Help With a Shipment?</h2>
+    <p>Our team is available Monday–Saturday to assist with tracking queries and updates.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </section>
+</main>
+
+<div id="foot-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+  <script>
+  // Keep active nav link based on current page
+  var currentFile = window.location.pathname.split('/').pop();
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href === currentFile) {
+      link.classList.add('active');
+    }
+    if (currentFile === '' || currentFile === 'index.html') {
+      if (href === 'index.html') {
+        link.classList.add('active');
+      }
+    }
+  });
+</script>
+<script>
+  // ══════════════════════════════════════
+  // SUPABASE CONFIG
+  // ══════════════════════════════════════
+  const SUPABASE_URL = 'https://cjihmglgwjtbxxxwqxqm.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqaWhtZ2xnd2p0Ynh4eHdxeHFtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4MzA0MjMsImV4cCI6MjA5NTQwNjQyM30.YGVjI-dHluZY3MUfE3a5C-mzpxkVQbLpZAWcnWfJvVI';
+
+  // ══════════════════════════════════════
+  // STATUS STEPS
+  // ══════════════════════════════════════
+  const STATUS_STEPS = [
+    'Received at Warehouse',
+    'Loaded',
+    'In Transit',
+    'Arrived at Mombasa',
+    'In Transit to ICD/Bond',
+    'At ICD/Bond',
+    'Customs Clearing',
+    'Out for Delivery',
+    'Delivered'
+  ];
+
+  const STATUS_ICONS = {
+    'Received at Warehouse': '🏭',
+    'Loaded': '🚛',
+    'In Transit': '🛣️',
+    'Arrived at Mombasa': '⚓',
+    'In Transit to ICD/Bond': '🚛',
+    'At ICD/Bond': '🏗️',
+    'Customs Clearing': '📋',
+    'Out for Delivery': '🚚',
+    'Delivered': '✅'
+  };
+
+
+  // ══════════════════════════════════════
+  // TRACK BUTTON
+  // ══════════════════════════════════════
+  document.getElementById('trackBtn').addEventListener('click', trackCargo);
+  document.getElementById('trackInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') trackCargo();
+  });
+
+  async function trackCargo() {
+    const input  = document.getElementById('trackInput');
+    const btn    = document.getElementById('trackBtn');
+    const result = document.getElementById('trackResult');
+    const section = document.getElementById('trackingResultSection');
+    const val    = input.value.trim();
+
+    if (!val) {
+      result.innerHTML = '<p style="color:#FCA5A5;margin-top:14px">⚠️ Please enter a tracking number.</p>';
+      return;
+    }
+
+    btn.textContent = 'Searching...';
+    btn.disabled = true;
+    result.innerHTML = '';
+
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/TRACKING?tracking_number=eq.${val}&select=*`,
+        {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        }
+      );
+      const data = await res.json();
+
+      btn.textContent = 'Track Now';
+      btn.disabled = false;
+
+      if (data && data.length > 0) {
+        const s = data[0];
+        section.style.display = 'block';
+        document.getElementById('cargoResult').innerHTML = buildTrackingCard(s);
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        result.innerHTML = `
+          <p style="color:#FCA5A5;margin-top:14px">
+            ❌ Tracking number <strong>${val}</strong> not found. 
+            Please check the number or contact us on +256 700 000 000.
+          </p>`;
+        section.style.display = 'none';
+      }
+    } catch(e) {
+      btn.textContent = 'Track Now';
+      btn.disabled = false;
+      result.innerHTML = '<p style="color:#FCA5A5;margin-top:14px">⚠️ Connection error. Please try again.</p>';
+    }
+  }
+
+  // ══════════════════════════════════════
+  // BUILD TRACKING CARD
+  // ══════════════════════════════════════
+  function buildTrackingCard(s) {
+    const currentIndex = STATUS_STEPS.indexOf(s.status);
+    const updated = new Date(s.last_updated).toLocaleString();
+
+    
+
+    return `
+      <div style="background:white;border-radius:20px;border:1px solid #E5E7EB;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.08);">
+        
+        <!-- HEADER -->
+        <div style="background:linear-gradient(135deg,#18181B,#27272a);padding:28px 32px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+            <div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase;">Tracking Number</div>
+              <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:white;">${s.tracking_number}</div>
+            </div>
+            <div style="
+              background:rgba(249,115,22,0.18);border:1px solid rgba(249,115,22,0.4);
+              color:#FB923C;padding:8px 18px;border-radius:50px;
+              font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+            ">${s.status}</div>
+          </div>
+        </div>
+
+        <!-- CARGO INFO -->
+<div style="padding:24px 32px;border-bottom:1px solid #F3F4F6;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;">
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Client</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${s.client_name}</div>
+  </div>
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Cargo</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${s.cargo_description}</div>
+  </div>
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Current Location</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${s.location || '—'}</div>
+  </div>
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">ETA to Mombasa</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${s.eta_mombasa || '—'}</div>
+  </div>
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">ETA to ICD/Bond</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${s.eta_icd || '—'}</div>
+  </div>
+  <div>
+    <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Last Updated</div>
+    <div style="font-weight:600;color:#111827;font-size:15px;">${updated}</div>
+  </div>
+  <div>
+  <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Weight</div>
+  <div style="font-weight:600;color:#111827;font-size:15px;">${s.weight_kg ? s.weight_kg + ' KG' : '—'}</div>
+</div>
+<div>
+  <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Volume</div>
+  <div style="font-weight:600;color:#111827;font-size:15px;">${s.NO_CBM ? s.NO_CBM + ' CBM' : '—'}</div>
+</div>
+<div>
+  <div style="font-size:11.5px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Packages</div>
+  <div style="font-weight:600;color:#111827;font-size:15px;">${s.no_of_packages ? s.no_of_packages + ' pkgs' : '—'}</div>
+</div>
+
+
+</div>
+
+
+        <!-- PROGRESS -->
+<div style="padding:28px 32px;">
+  <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#111827;margin-bottom:8px;">Shipment Progress</div>
+  
+  <!-- NB NOTE -->
+  <div style="background:#FFF7ED;border:1px solid rgba(249,115,22,0.25);border-radius:10px;padding:10px 16px;margin-bottom:22px;font-size:13px;color:#92400E;">
+    <strong>📌 NB:</strong> <strong>ETA</strong> = <strong>Expected Time of Arrival</strong> — the estimated date your cargo is expected to reach that location.
+  </div>
+
+  ${STATUS_STEPS.map((step, i) => {
+    const done    = i < currentIndex;
+    const current = i === currentIndex;
+
+    // ETA label shown AFTER certain steps
+    let etaHtml = '';
+    if (step === 'In Transit' && s.eta_mombasa) {
+      etaHtml = `
+        <div style="margin:6px 0 0 52px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:7px 14px;font-size:13px;color:#1E40AF;display:inline-block;">
+          📅 <strong>ETA to Mombasa:</strong> ${s.eta_mombasa}
+        </div>
+      `;
+    }
+    if (step === 'In Transit to ICD/Bond' && s.eta_icd) {
+      etaHtml = `
+        <div style="margin:6px 0 0 52px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:7px 14px;font-size:13px;color:#1E40AF;display:inline-block;">
+          📅 <strong>ETA to ICD/Bond:</strong> ${s.eta_icd}
+        </div>
+      `;
+    }
+
+    return `
+      <div style="display:flex;flex-direction:column;margin-bottom:4px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="
+              width:38px;height:38px;border-radius:50%;
+              display:flex;align-items:center;justify-content:center;
+              font-size:18px;flex-shrink:0;
+              background:${current ? '#F97316' : done ? '#22C55E' : '#F3F4F6'};
+              border:2px solid ${current ? '#F97316' : done ? '#22C55E' : '#E5E7EB'};
+              box-shadow:${current ? '0 0 0 4px rgba(249,115,22,0.15)' : 'none'};
+            ">
+              ${done ? '✓' : STATUS_ICONS[step]}
+            </div>
+            ${i < STATUS_STEPS.length - 1 ? `
+              <div style="width:2px;height:32px;background:${done ? '#22C55E' : '#E5E7EB'};margin:4px 0;"></div>
+            ` : ''}
+          </div>
+          <div style="padding-top:8px;flex:1;">
+            <div style="
+              font-family:'Syne',sans-serif;font-size:15px;
+              font-weight:${current ? '700' : '500'};
+              color:${current ? '#F97316' : done ? '#111827' : '#9CA3AF'};
+            ">${step}</div>
+            ${current ? `<div style="font-size:12.5px;color:#6B7280;margin-top:2px;">Current Status</div>` : ''}
+          </div>
+        </div>
+        ${etaHtml}
+      </div>
+    `;
+  }).join('')}
+</div>
+
+
+        ${s.notes ? `
+        <!-- NOTES -->
+        <div style="margin:0 32px 28px;background:#FFF7ED;border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:16px 20px;">
+          <div style="font-size:12px;font-weight:700;color:#F97316;margin-bottom:6px;letter-spacing:0.5px;">📌 NOTE FROM SI CARGO UGANDA</div>
+          <div style="font-size:14.5px;color:#374151;line-height:1.7;">${s.notes}</div>
+        </div>
+        ` : ''}
+
+        <!-- FOOTER -->
+        <div style="background:#F9FAFB;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div style="font-size:13px;color:#6B7280;">Need help? Call us on <strong style="color:#F97316;">+256 700 000 000</strong></div>
+          <div style="font-size:12px;color:#9CA3AF;">SI CARGO UGANDA © 2026</div>
+        </div>
+      </div>
+    `;
+  }
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.querySelector('.hamburger');
+    var navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+        var isOpen = navLinks.classList.contains('open');
+        var spans = hamburger.querySelectorAll('span');
+        if (isOpen) {
+          spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+        } else {
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      });
+    }
+  });
+</script>
+
+
+</body>
+</html>
