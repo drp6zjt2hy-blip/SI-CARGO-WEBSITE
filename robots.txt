@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.sitracker.com/sitemap.xml
+Sitemap: https://www.sicargotracker.com/sitemap.xml

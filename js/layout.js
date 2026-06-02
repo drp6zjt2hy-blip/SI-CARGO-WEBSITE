@@ -73,9 +73,9 @@ const FOOTER_HTML = `
     <div class="footer-col">
       <h4>Contact</h4>
       <ul>
-        <li><a href="tel:+256781094840">+256 781 094 840</a></li>
+        <li><a href="tel:+256756864623">+256 756 864 623</a></li>
         <li><a href="mailto:info@sicargouganda.com">info@sicargouganda.com</a></li>
-        <li><a href="contact.html">Top City Plaza kisenyi,Kampala, Uganda</a></li>
+        <li><a href="contact.html">Kampala, Uganda</a></li>
         <li><a href="faq.html">FAQ</a></li>
       </ul>
     </div>
