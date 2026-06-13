@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -151,7 +150,6 @@
     .admin-body { padding:40px 32px; max-width:1200px; margin:0 auto; }
     .nb-banner { display:flex; align-items:center; gap:12px; padding:14px 20px; background:rgba(249,115,22,0.06); border:1px solid var(--border-orange); border-radius:8px; margin-bottom:32px; font-size:13px; color:rgba(249,115,22,0.9); }
 
-    /* Main tabs */
     .tab-buttons { display:flex; gap:2px; margin-bottom:28px; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:4px; width:fit-content; }
     .tab-btn { padding:10px 24px; border-radius:7px; border:none; background:transparent; cursor:pointer; font-family:'Syne',sans-serif; font-size:13px; font-weight:600; color:var(--text-dim); transition:all 0.25s ease; }
     .tab-btn:hover { color:var(--text); background:rgba(255,255,255,0.04); }
@@ -196,92 +194,42 @@
     .alert.error { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); color:#FCA5A5; }
     .alert.show { display:block; animation:alertPop 0.3s ease; }
 
-    /* ══ CONTAINER TABS ══ */
     .container-tabs-wrap {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
     }
     .container-tab {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: 'Syne', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-dim);
-      transition: all 0.25s ease;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+      color: var(--text-dim); transition: all 0.25s ease;
+      letter-spacing: 0.5px; text-transform: uppercase;
     }
-    .container-tab:hover {
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      border-color: rgba(255,255,255,0.15);
-    }
-    .container-tab.active {
-      background: var(--orange-glow);
-      border-color: var(--border-orange);
-      color: var(--orange);
-    }
+    .container-tab:hover { background: rgba(255,255,255,0.08); color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .container-tab.active { background: var(--orange-glow); border-color: var(--border-orange); color: var(--orange); }
     .container-tab .ct-count {
-      background: rgba(249,115,22,0.2);
-      color: var(--orange);
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 99px;
-      min-width: 20px;
-      text-align: center;
+      background: rgba(249,115,22,0.2); color: var(--orange);
+      font-size: 10px; font-weight: 800; padding: 2px 7px;
+      border-radius: 99px; min-width: 20px; text-align: center;
     }
-    .container-tab.active .ct-count {
-      background: var(--orange);
-      color: white;
-    }
-
-    /* Container panel */
+    .container-tab.active .ct-count { background: var(--orange); color: white; }
     .container-panel { display: none; }
     .container-panel.active { display: block; animation: tabFade 0.3s ease forwards; opacity: 0; transform: translateY(8px); }
-
-    .container-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
+    .container-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
     .container-header-info { display: flex; align-items: center; gap: 14px; }
     .container-num-badge {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--orange);
-      background: var(--orange-glow);
-      border: 1px solid var(--border-orange);
-      padding: 8px 18px;
-      border-radius: 8px;
-      letter-spacing: 1px;
+      font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+      color: var(--orange); background: var(--orange-glow);
+      border: 1px solid var(--border-orange); padding: 8px 18px;
+      border-radius: 8px; letter-spacing: 1px;
     }
-    .container-shipment-count {
-      font-size: 13px;
-      color: var(--text-dim);
-    }
+    .container-shipment-count { font-size: 13px; color: var(--text-dim); }
 
-    /* Search bar */
     .search-bar { width:100%; padding:12px 18px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:'DM Sans',sans-serif; color:var(--text); outline:none; margin-bottom:24px; transition:border-color 0.3s,box-shadow 0.3s; }
     .search-bar:focus { border-color:var(--orange); box-shadow:0 0 0 3px rgba(249,115,22,0.08); }
     .search-bar::placeholder { color:rgba(255,255,255,0.2); }
 
-    /* Table */
     .table-wrap { overflow-x:auto; }
     table { width:100%; border-collapse:collapse; font-size:13.5px; }
     thead tr { border-bottom:1px solid var(--border); }
@@ -296,6 +244,7 @@
     .status-loaded    { background:rgba(59,130,246,0.12);   color:#93C5FD; border:1px solid rgba(59,130,246,0.2); }
     .status-transit   { background:rgba(139,92,246,0.12);   color:#C4B5FD; border:1px solid rgba(139,92,246,0.2); }
     .status-mombasa   { background:rgba(34,197,94,0.12);    color:#86EFAC; border:1px solid rgba(34,197,94,0.2); }
+    .status-malaba    { background:rgba(249,115,22,0.12);   color:#FDBA74; border:1px solid rgba(249,115,22,0.2); }
     .status-icd       { background:rgba(249,115,22,0.12);   color:#FDB87D; border:1px solid rgba(249,115,22,0.2); }
     .status-customs   { background:rgba(234,179,8,0.12);    color:#FDE047; border:1px solid rgba(234,179,8,0.2); }
     .status-delivery  { background:rgba(20,184,166,0.12);   color:#5EEAD4; border:1px solid rgba(20,184,166,0.2); }
@@ -310,12 +259,7 @@
     .empty-state { text-align:center; padding:60px 20px; color:var(--text-dim); }
     .empty-state .empty-icon { font-size:48px; margin-bottom:14px; opacity:0.5; }
     .empty-state p { font-size:14px; }
-
-    .no-containers {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-dim);
-    }
+    .no-containers { text-align: center; padding: 60px 20px; color: var(--text-dim); }
     .no-containers .nc-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.4; }
     .no-containers p { font-size: 14px; line-height: 1.7; }
 
@@ -335,7 +279,8 @@
   </style>
 </head>
 <body>
-  <!-- ══ LOGIN ══ -->
+
+<!-- ══ LOGIN ══ -->
 <div class="login-wrap" id="loginWrap">
   <div class="login-bg"></div>
   <div class="login-grid"></div>
@@ -411,7 +356,7 @@
       <button class="tab-btn" onclick="switchTab('all', this)">📦 All Shipments</button>
     </div>
 
-    <!-- TAB 1: ADD -->
+    <!-- ══ TAB 1: ADD SHIPMENT ══ -->
     <div class="tab-content active" id="tab-add">
       <div class="card">
         <h3>Add New Shipment</h3>
@@ -462,11 +407,14 @@
         <div class="form-row">
           <div class="form-group">
             <label>Current Status <span class="req">*</span></label>
+            <!-- ✅ ADD SHIPMENT STATUS DROPDOWN — At Malaba Border included -->
             <select id="add_status">
               <option value="Received at Warehouse">Received at Warehouse</option>
               <option value="Loaded">Loaded</option>
               <option value="In Transit">In Transit</option>
               <option value="Arrived at Mombasa">Arrived at Mombasa</option>
+              <option value="In Transit to ICD/Bond">In Transit to ICD/Bond</option>
+              <option value="At Malaba Border">At Malaba Border</option>
               <option value="At ICD/Bond">At ICD/Bond</option>
               <option value="Customs Clearing">Customs Clearing</option>
               <option value="Out for Delivery">Out for Delivery</option>
@@ -513,7 +461,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: UPDATE -->
+    <!-- ══ TAB 2: UPDATE STATUS ══ -->
     <div class="tab-content" id="tab-update">
       <div class="card">
         <h3>Update Shipment Status</h3>
@@ -541,12 +489,14 @@
           <div class="form-row">
             <div class="form-group">
               <label>New Status <span class="req">*</span></label>
+              <!-- ✅ UPDATE STATUS DROPDOWN — At Malaba Border included -->
               <select id="upd_status">
                 <option value="Received at Warehouse">Received at Warehouse</option>
                 <option value="Loaded">Loaded</option>
                 <option value="In Transit">In Transit</option>
                 <option value="Arrived at Mombasa">Arrived at Mombasa</option>
                 <option value="In Transit to ICD/Bond">In Transit to ICD/Bond</option>
+                <option value="At Malaba Border">At Malaba Border</option>
                 <option value="At ICD/Bond">At ICD/Bond</option>
                 <option value="Customs Clearing">Customs Clearing</option>
                 <option value="Out for Delivery">Out for Delivery</option>
@@ -577,31 +527,25 @@
       </div>
     </div>
 
-    <!-- TAB 3: ALL SHIPMENTS — CONTAINER VIEW -->
+    <!-- ══ TAB 3: ALL SHIPMENTS — CONTAINER VIEW ══ -->
     <div class="tab-content" id="tab-all">
       <div class="card">
         <h3>All Shipments by Container</h3>
-
-        <!-- Search bar -->
         <input type="text" class="search-bar" id="searchBar"
           placeholder="🔍  Search by tracking number or client name..."
           oninput="filterCurrentContainer()">
-
-        <!-- Container tabs -->
         <div class="container-tabs-wrap" id="containerTabsWrap">
           <div class="no-containers">
             <div class="nc-icon">📦</div>
             <p>Loading containers...</p>
           </div>
         </div>
-
-        <!-- Container panels injected here -->
         <div id="containerPanelsWrap"></div>
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- /admin-body -->
+</div><!-- /admin-wrap -->
 
 <script>
   /* ── Clock ── */
@@ -644,10 +588,10 @@
     const usernameInput = document.getElementById('adminUser').value.trim();
     const password = document.getElementById('adminPass').value.trim();
     const userMap = {
-      'karim': 'sseganekarim746@gmail.com',
+      'karim'  : 'sseganekarim746@gmail.com',
       'quraish': 'quraishsegi99@gmail.com',
-      'sharon': 'kiyingisharon9@gmail.com',
-      'moses': 'moses@gmail.com'
+      'sharon' : 'kiyingisharon9@gmail.com',
+      'moses'  : 'moses@gmail.com'
     };
     const email = userMap[usernameInput.toLowerCase().trim()] || usernameInput;
     if (!email || !password) {
@@ -711,48 +655,52 @@
   /* ── STATUS BADGE ── */
   function getStatusBadge(status) {
     const map = {
-      'Received at Warehouse':'status-received','Loaded':'status-loaded',
-      'In Transit':'status-transit','Arrived at Mombasa':'status-mombasa',
-      'In Transit to ICD/Bond':'status-icd','At ICD/Bond':'status-icd',
-      'Customs Clearing':'status-customs','Out for Delivery':'status-delivery',
-      'Delivered':'status-delivered'
+      'Received at Warehouse'  : 'status-received',
+      'Loaded'                 : 'status-loaded',
+      'In Transit'             : 'status-transit',
+      'Arrived at Mombasa'     : 'status-mombasa',
+      'In Transit to ICD/Bond' : 'status-icd',
+      'At Malaba Border'       : 'status-malaba',
+      'At ICD/Bond'            : 'status-icd',
+      'Customs Clearing'       : 'status-customs',
+      'Out for Delivery'       : 'status-delivery',
+      'Delivered'              : 'status-delivered'
     };
-    return `<span class="status-badge ${map[status]||'status-received'}">${status}</span>`;
+    return `<span class="status-badge ${map[status] || 'status-received'}">${status}</span>`;
   }
 
   /* ── ADD SHIPMENT ── */
   async function addShipment() {
     const btn = document.getElementById('addBtn');
     const alert = document.getElementById('addAlert');
-    const tracking = document.getElementById('add_tracking').value.trim();
-    const client = document.getElementById('add_client').value.trim();
-    const desc = document.getElementById('add_desc').value.trim();
+    const tracking  = document.getElementById('add_tracking').value.trim();
+    const client    = document.getElementById('add_client').value.trim();
+    const desc      = document.getElementById('add_desc').value.trim();
     const container = document.getElementById('add_container_number').value.trim();
 
     if (!tracking || !client || !desc || !container) {
       showAlert(alert, 'error', '⚠️ Please fill in all required fields including Container Number.');
       return;
     }
-
     setButtonLoading(btn, 'Adding...');
     const data = {
-      tracking_number: tracking,
-      client_name: client,
-      phone: document.getElementById('add_phone').value.trim(),
-      container_number: container,
-      origin: document.getElementById('add_origin').value.trim(),
+      tracking_number  : tracking,
+      client_name      : client,
+      phone            : document.getElementById('add_phone').value.trim(),
+      container_number : container,
+      origin           : document.getElementById('add_origin').value.trim(),
       cargo_description: desc,
-      destination: document.getElementById('add_dest').value.trim(),
-      shipping_method: document.getElementById('add_method').value,
-      status: document.getElementById('add_status').value,
-      location: document.getElementById('add_location').value.trim(),
-      weight_kg: document.getElementById('add_weight_kg').value.trim(),
-      NO_CBM: document.getElementById('add_NO_CBM').value.trim(),
-      no_of_packages: document.getElementById('add_no_of_packages').value.trim(),
-      eta_mombasa: document.getElementById('add_eta_mombasa').value.trim(),
-      eta_icd: document.getElementById('add_eta_icd').value.trim(),
-      notes: document.getElementById('add_notes').value.trim(),
-      last_updated: new Date().toISOString()
+      destination      : document.getElementById('add_dest').value.trim(),
+      shipping_method  : document.getElementById('add_method').value,
+      status           : document.getElementById('add_status').value,
+      location         : document.getElementById('add_location').value.trim(),
+      weight_kg        : document.getElementById('add_weight_kg').value.trim(),
+      NO_CBM           : document.getElementById('add_NO_CBM').value.trim(),
+      no_of_packages   : document.getElementById('add_no_of_packages').value.trim(),
+      eta_mombasa      : document.getElementById('add_eta_mombasa').value.trim(),
+      eta_icd          : document.getElementById('add_eta_icd').value.trim(),
+      notes            : document.getElementById('add_notes').value.trim(),
+      last_updated     : new Date().toISOString()
     };
     try {
       const result = await supabase('POST', 'TRACKING', data);
@@ -760,7 +708,9 @@
         showAlert(alert, 'success', `✅ Shipment ${tracking} added to container ${container}!`);
         btn.textContent = 'Add Shipment →';
         btn.disabled = false;
-        ['add_tracking','add_client','add_phone','add_container_number','add_origin','add_desc','add_dest','add_location','add_notes','add_weight_kg','add_NO_CBM','add_no_of_packages','add_eta_mombasa','add_eta_icd'].forEach(id => { document.getElementById(id).value = ''; });
+        ['add_tracking','add_client','add_phone','add_container_number','add_origin','add_desc',
+         'add_dest','add_location','add_notes','add_weight_kg','add_NO_CBM',
+         'add_no_of_packages','add_eta_mombasa','add_eta_icd'].forEach(id => { document.getElementById(id).value = ''; });
         loadShipments();
       } else {
         showAlert(alert, 'error', 'Error adding shipment. Try again.');
@@ -777,25 +727,25 @@
   /* ── SEARCH SHIPMENT ── */
   async function searchShipment() {
     const tracking = document.getElementById('upd_tracking').value.trim();
-    const alert = document.getElementById('searchAlert');
+    const alert    = document.getElementById('searchAlert');
     if (!tracking) { showAlert(alert, 'error', 'Please enter a tracking number.'); return; }
     try {
       const result = await supabase('GET', 'TRACKING', null, `tracking_number=eq.${tracking}&select=*`);
       if (result && result.length > 0) {
         const s = result[0];
-        document.getElementById('upd_id').value = s.id || '';
-        document.getElementById('upd_client').value = s.client_name;
-        document.getElementById('upd_container_number').value = s.container_number || '';
-        document.getElementById('upd_desc').value = s.cargo_description;
-        document.getElementById('upd_status').value = s.status;
-        document.getElementById('upd_location').value = s.location || '';
-        document.getElementById('upd_eta_mombasa').value = s.eta_mombasa || '';
-        document.getElementById('upd_eta_icd').value = s.eta_icd || '';
-        document.getElementById('upd_weight_kg').value = s.weight_kg || '';
-        document.getElementById('upd_NO_CBM').value = s.NO_CBM || '';
-        document.getElementById('upd_notes').value = s.notes || '';
-        document.getElementById('upd_no_of_packages').value = s.no_of_packages || '';
-        document.getElementById('updateForm').style.display = 'block';
+        document.getElementById('upd_id').value              = s.id || '';
+        document.getElementById('upd_client').value          = s.client_name;
+        document.getElementById('upd_container_number').value= s.container_number || '';
+        document.getElementById('upd_desc').value            = s.cargo_description;
+        document.getElementById('upd_status').value          = s.status;
+        document.getElementById('upd_location').value        = s.location || '';
+        document.getElementById('upd_eta_mombasa').value     = s.eta_mombasa || '';
+        document.getElementById('upd_eta_icd').value         = s.eta_icd || '';
+        document.getElementById('upd_weight_kg').value       = s.weight_kg || '';
+        document.getElementById('upd_NO_CBM').value          = s.NO_CBM || '';
+        document.getElementById('upd_notes').value           = s.notes || '';
+        document.getElementById('upd_no_of_packages').value  = s.no_of_packages || '';
+        document.getElementById('updateForm').style.display  = 'block';
         alert.style.display = 'none';
       } else {
         showAlert(alert, 'error', 'Tracking number not found.');
@@ -806,26 +756,27 @@
 
   /* ── UPDATE SHIPMENT ── */
   async function updateShipment() {
-    const alert = document.getElementById('updateAlert');
+    const alert    = document.getElementById('updateAlert');
     const tracking = document.getElementById('upd_tracking').value.trim();
     const data = {
-      eta_mombasa: document.getElementById('upd_eta_mombasa').value.trim(),
-      eta_icd: document.getElementById('upd_eta_icd').value.trim(),
-      container_number: document.getElementById('upd_container_number').value.trim() || null,
-      status: document.getElementById('upd_status').value,
-      location: document.getElementById('upd_location').value.trim(),
-      notes: document.getElementById('upd_notes').value.trim(),
-      last_updated: new Date().toISOString(),
-      weight_kg: document.getElementById('upd_weight_kg').value.trim() || null,
-      NO_CBM: document.getElementById('upd_NO_CBM').value.trim() || null,
-      no_of_packages: document.getElementById('upd_no_of_packages').value.trim() || null,
+      eta_mombasa      : document.getElementById('upd_eta_mombasa').value.trim(),
+      eta_icd          : document.getElementById('upd_eta_icd').value.trim(),
+      container_number : document.getElementById('upd_container_number').value.trim() || null,
+      status           : document.getElementById('upd_status').value,
+      location         : document.getElementById('upd_location').value.trim(),
+      notes            : document.getElementById('upd_notes').value.trim(),
+      last_updated     : new Date().toISOString(),
+      weight_kg        : document.getElementById('upd_weight_kg').value.trim() || null,
+      NO_CBM           : document.getElementById('upd_NO_CBM').value.trim() || null,
+      no_of_packages   : document.getElementById('upd_no_of_packages').value.trim() || null,
     };
     try {
       await supabase('PATCH', 'TRACKING', data, `tracking_number=eq.${tracking}`);
       showAlert(alert, 'success', '✅ Status updated successfully!');
       document.getElementById('updateForm').style.display = 'none';
       document.getElementById('upd_tracking').value = '';
-      ['upd_client','upd_desc','upd_location','upd_notes','upd_weight_kg','upd_NO_CBM','upd_no_of_packages','upd_eta_mombasa','upd_eta_icd','upd_container_number'].forEach(id => { document.getElementById(id).value = ''; });
+      ['upd_client','upd_desc','upd_location','upd_notes','upd_weight_kg','upd_NO_CBM',
+       'upd_no_of_packages','upd_eta_mombasa','upd_eta_icd','upd_container_number'].forEach(id => { document.getElementById(id).value = ''; });
       setTimeout(() => loadShipments(), 500);
     } catch(e) {
       console.error('Update error:', e);
@@ -853,19 +804,22 @@
   }
 
   function updateStats(data) {
-    document.getElementById('statTotal').textContent = data.length;
-    document.getElementById('statTransit').textContent = data.filter(s => ['In Transit','Loaded','Arrived at Mombasa','In Transit to ICD/Bond'].includes(s.status)).length;
+    document.getElementById('statTotal').textContent     = data.length;
+    document.getElementById('statTransit').textContent   = data.filter(s =>
+      ['In Transit','Loaded','Arrived at Mombasa','In Transit to ICD/Bond',
+       'At Malaba Border','At ICD/Bond','Customs Clearing','Out for Delivery'].includes(s.status)
+    ).length;
     document.getElementById('statDelivered').textContent = data.filter(s => s.status === 'Delivered').length;
-    // Count unique container numbers
     const uniqueContainers = new Set(data.map(s => s.container_number || 'unassigned').filter(c => c !== 'unassigned'));
     document.getElementById('statContainers').textContent = uniqueContainers.size;
   }
 
   function renderContainerView(data) {
-    /* Group shipments by container_number */
     const groups = {};
     data.forEach(s => {
-      const key = (s.container_number && s.container_number.trim() !== '') ? s.container_number.trim().toUpperCase() : 'UNASSIGNED';
+      const key = (s.container_number && s.container_number.trim() !== '')
+        ? s.container_number.trim().toUpperCase()
+        : 'UNASSIGNED';
       if (!groups[key]) groups[key] = [];
       groups[key].push(s);
     });
@@ -886,12 +840,10 @@
       return;
     }
 
-    /* If no active tab yet or previous active tab no longer exists, use first */
     if (!activeContainerTab || !groups[activeContainerTab]) {
       activeContainerTab = containerKeys[0];
     }
 
-    /* Render tabs */
     document.getElementById('containerTabsWrap').innerHTML = containerKeys.map(key => `
       <div class="container-tab ${key === activeContainerTab ? 'active' : ''}"
            onclick="switchContainerTab('${key}')">
@@ -900,7 +852,6 @@
       </div>
     `).join('');
 
-    /* Render panels */
     document.getElementById('containerPanelsWrap').innerHTML = containerKeys.map(key => `
       <div class="container-panel ${key === activeContainerTab ? 'active' : ''}" id="panel-${key.replace(/[^a-zA-Z0-9]/g,'_')}">
         <div class="container-header">
@@ -953,16 +904,13 @@
     activeContainerTab = key;
     document.querySelectorAll('.container-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.container-panel').forEach(p => p.classList.remove('active'));
-    // Find and activate correct tab and panel
     document.querySelectorAll('.container-tab').forEach(t => {
       if (t.textContent.includes(key) || (key === 'UNASSIGNED' && t.textContent.includes('Unassigned'))) {
         t.classList.add('active');
       }
     });
-    const panelId = 'panel-' + key.replace(/[^a-zA-Z0-9]/g, '_');
-    const panel = document.getElementById(panelId);
+    const panel = document.getElementById('panel-' + key.replace(/[^a-zA-Z0-9]/g, '_'));
     if (panel) panel.classList.add('active');
-    // Clear search
     document.getElementById('searchBar').value = '';
   }
 
@@ -970,10 +918,8 @@
     const q = document.getElementById('searchBar').value.toLowerCase();
     const activePanel = document.querySelector('.container-panel.active');
     if (!activePanel) return;
-    const rows = activePanel.querySelectorAll('tbody tr');
-    rows.forEach(row => {
-      const text = row.textContent.toLowerCase();
-      row.style.display = text.includes(q) ? '' : 'none';
+    activePanel.querySelectorAll('tbody tr').forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
     });
   }
 
