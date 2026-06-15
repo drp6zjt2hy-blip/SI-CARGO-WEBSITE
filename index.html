@@ -661,6 +661,41 @@
     .pstep-icon { font-size: 28px; margin-bottom: 16px; display: block; }
     .pstep h3 { font-family: 'Syne', sans-serif; font-size: 17px; color: white; margin-bottom: 10px; }
     .pstep p { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+    /* Animated connecting line between steps */
+@keyframes lineGrowH {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.process-steps-new::before {
+  transform-origin: left;
+  animation: lineGrowH 1.5s 0.5s ease forwards;
+  transform: scaleX(0);
+}
+
+/* Step number glow on hover */
+.pstep-num {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.pstep:hover .pstep-num {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 12px rgba(249,115,22,0.1), 0 0 30px rgba(249,115,22,0.25);
+}
+
+/* Step icon float */
+.pstep-icon {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+.pstep:hover .pstep-icon {
+  transform: translateY(-6px) scale(1.15);
+}
+
+/* Step text fade up on hover */
+.pstep h3, .pstep p {
+  transition: color 0.3s ease;
+}
+.pstep:hover h3 { color: var(--orange); }
+
 
     /* ══ GALLERY ══ */
     .gallery-section { padding: 100px 6%; background: white; }
@@ -875,8 +910,8 @@
         To Uganda.
       </h1>
       <p class="hero-sub">
-        Know exactly where your cargo is — every step of the way.
-        SI CARGO TRACKER ships from China to Uganda with real-time tracking,
+        Know exactly where your cargo is every step of the way.
+        SI CARGO UGANDA ships from China to Uganda with real-time tracking,
         fast delivery, and full customs clearance.
       </p>
       <div class="hero-btns">
@@ -929,144 +964,14 @@
     </div>
   </div>
 
-  <!-- ══ PHOTO + TEXT SPLIT ══ -->
-  <section class="photo-section">
-    <div class="photo-left reveal-new">
-      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop"
-     loading="lazy"
-     alt="SI CARGO TRACKER warehouse">
-      <div class="photo-left-overlay"></div>
-      <div class="photo-left-tag">Our Operations</div>
-      <div class="photo-left-caption">Your goods handled with care — from Guangzhou to Kampala.</div>
-    </div>
-    <div class="photo-right reveal-new">
-      <span class="section-tag" style="color:var(--orange)">About SI CARGO TRACKER</span>
-      <h2>Track Every Shipment, Every Step</h2>
-      <p>SI CARGO TRACKER gives every client a personal tracking number so you always know where your cargo is — from our warehouse in China all the way to your door in Uganda.</p>
-      <div class="feature-list">
-        <div class="feature-item"><div class="feature-dot"></div>Licensed customs clearing agents in Uganda</div>
-        <div class="feature-item"><div class="feature-dot"></div>Bonded warehouse in Guangzhou, China</div>
-        <div class="feature-item"><div class="feature-dot"></div>Transparent, all-inclusive pricing</div>
-        <div class="feature-item"><div class="feature-dot"></div>WhatsApp & phone support 6 days a week</div>
-        <div class="feature-item"><div class="feature-dot"></div>Real-time cargo tracking for every client</div>
-      </div>
-      <a href="about.html" class="btn-hero-primary" style="align-self:flex-start;display:inline-flex;">Our Story →</a>
-    </div>
-  </section>
-
-  <!-- ══ WHY US ══ -->
-  <div class="why-new">
-    <div class="why-item-new reveal-new">
-      <span class="why-icon-new"></span>
-      <h3>Live Tracking</h3>
-      <p>Track your cargo in real-time from China all the way to your door in Uganda.</p>
-    </div>
-    <div class="why-item-new reveal-new">
-      <span class="why-icon-new"></span>
-      <h3>Fast Delivery</h3>
-      <p>Air freight in 5–10 days from our China warehouse to Kampala.</p>
-    </div>
-    <div class="why-item-new reveal-new">
-      <span class="why-icon-new"></span>
-      <h3>Secure Handling</h3>
-      <p>Every shipment is insured and tracked from pickup to delivery.</p>
-    </div>
-    <div class="why-item-new reveal-new">
-      <span class="why-icon-new"></span>
-      <h3>Best Rates</h3>
-      <p>Competitive, transparent pricing with no hidden fees ever.</p>
-    </div>
-  </div>
-
-  <!-- ══ SERVICES ══ -->
-  <section class="services-new">
-    <div class="services-header reveal-new">
-      <div>
-        <span class="section-tag">What We Offer</span>
-        <h2>End-to-End Logistics Services</h2>
-      </div>
-      <p>From supplier pickup in China to final delivery at your door in Uganda — tracked every step of the way.</p>
-    </div>
-    <div class="services-scroll">
-      <div class="svc-card reveal-new">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=900&auto=format&fit=crop" loading="lazy" alt="Air Freight">
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-num">01</div>
-        <div class="svc-card-content">
-          <span class="svc-icon"></span>
-          <h3>Air Freight</h3>
-          <p>Expedited air cargo from major Chinese cities to Entebbe in 5–10 days. Ideal for urgent or high-value shipments.</p>
-          <a href="services.html#air" class="svc-link">Learn more →</a>
-        </div>
-      </div>
-      <div class="svc-card reveal-new">
-        <img src="https://images.unsplash.com/photo-1493946740644-2d8a1f1a6aff?q=80&w=900&auto=format&fit=crop" alt="Sea Freight">
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-num">02</div>
-        <div class="svc-card-content">
-          <span class="svc-icon"></span>
-          <h3>Sea Freight</h3>
-          <p>Cost-effective FCL & LCL ocean shipping for large volumes, heavy machinery, and bulk orders.</p>
-          <a href="services.html#sea" class="svc-link">Learn more →</a>
-        </div>
-      </div>
-      <div class="svc-card reveal-new">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=900&auto=format&fit=crop" alt="Door-to-Door">
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-num">03</div>
-        <div class="svc-card-content">
-          <span class="svc-icon"></span>
-          <h3>Door-to-Door</h3>
-          <p>Complete pickup from your Chinese supplier and delivery straight to your home or business in Uganda.</p>
-          <a href="services.html#d2d" class="svc-link">Learn more →</a>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:2px;">
-      <div class="services-scroll">
-        <div class="svc-card reveal-new">
-          <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?q=80&w=900&auto=format&fit=crop" alt="Customs">
-          <div class="svc-card-overlay"></div>
-          <div class="svc-card-num">04</div>
-          <div class="svc-card-content">
-            <span class="svc-icon"></span>
-            <h3>Customs Clearance</h3>
-            <p>Licensed URA agents handle all documentation, duty calculations and clearance at Entebbe and Mombasa.</p>
-            <a href="services.html#customs" class="svc-link">Learn more →</a>
-          </div>
-        </div>
-        <div class="svc-card reveal-new">
-          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=900&auto=format&fit=crop" alt="Warehousing">
-          <div class="svc-card-overlay"></div>
-          <div class="svc-card-num">05</div>
-          <div class="svc-card-content">
-            <span class="svc-icon"></span>
-            <h3>Warehousing</h3>
-            <p>Secure storage at our China warehouse. We receive, inspect, and consolidate your goods before dispatch.</p>
-            <a href="services.html#warehouse" class="svc-link">Learn more →</a>
-          </div>
-        </div>
-        <div class="svc-card reveal-new">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=900&auto=format&fit=crop" alt="Consultation">
-          <div class="svc-card-overlay"></div>
-          <div class="svc-card-num">06</div>
-          <div class="svc-card-content">
-            <span class="svc-icon"></span>
-            <h3>Import Consultation</h3>
-            <p>One-on-one guidance on sourcing in China, duty calculations, and optimising your import costs.</p>
-            <a href="services.html#consult" class="svc-link">Learn more →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ══ PROCESS ══ -->
   <section class="process-new">
     <div class="process-new-header reveal-new">
       <span class="section-tag" style="color:var(--orange)">How It Works</span>
       <h2>Ship, Track & Receive</h2>
-      <p>From your supplier in China to your door in Uganda — tracked every step of the way.</p>
+      <p>From your supplier in China to your door in Uganda.  Tracked every step of the way.</p>
     </div>
     <div class="process-steps-new">
       <div class="pstep reveal-new">
@@ -1092,81 +997,6 @@
         <span class="pstep-icon"></span>
         <h3>You Receive Your Goods</h3>
         <p>We deliver to our Kampala office or directly to your address. Simple, reliable, on time.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ GALLERY ══ -->
-  <section class="gallery-section">
-    <div class="gallery-header reveal-new">
-      <span class="section-tag">Our Work</span>
-      <h2>Real Cargo. Real People. Real Results.</h2>
-      <p>A glimpse into our operations — from Guangzhou to Kampala.</p>
-    </div>
-    <div class="gallery-grid">
-  <div class="gallery-item"><img src="office6.jpg" loading="lazy" alt="Cargo operations"></div>
-  <div class="gallery-item"><img src="office1.jpg" loading="lazy" alt="Shipping containers"></div>
-  <div class="gallery-item"><img src="office2.jpg" loading="lazy" alt="Warehouse"></div>
-  <div class="gallery-item"><img src="office7.jpg" loading="lazy" alt="Team"></div>
-  <div class="gallery-item"><img src="office4.jpg" loading="lazy" alt="Air freight"></div>
-  <div class="gallery-item"><img src="office5.jpg" loading="lazy" alt="Sea freight"></div>
-</div>
-  </section>
-
-  <!-- ══ TESTIMONIALS ══ -->
-  <section class="testi-new">
-    <div class="testi-new-header reveal-new">
-      <div>
-        <span class="section-tag" style="color:var(--orange)">Client Stories</span>
-        <h2>What Our Clients Say</h2>
-      </div>
-      <p style="color:rgba(255,255,255,0.4);font-size:14px;max-width:260px;line-height:1.8;">Trusted by hundreds of businesses and individuals across Uganda.</p>
-    </div>
-    <div class="testi-grid-new">
-      <div class="testi-card-new reveal-new">
-        <div class="testi-stars-new">★★★★★</div>
-        <p class="testi-text-new">"SI CARGO TRACKER made importing from China incredibly easy. I tracked my electronics every step of the way and they arrived in 7 days perfectly packed!"</p>
-        <div class="testi-author-new">
-          <div class="testi-av-new">AK</div>
-          <div>
-            <div class="testi-name-new">Aisha Kamukama</div>
-            <div class="testi-role-new">Electronics Retailer, Kampala</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card-new reveal-new">
-        <div class="testi-stars-new">★★★★★</div>
-        <p class="testi-text-new">"The sea freight option saved me a lot of money on my bulk textile order. The team handled customs clearance flawlessly — no delays at all."</p>
-        <div class="testi-author-new">
-          <div class="testi-av-new">JM</div>
-          <div>
-            <div class="testi-name-new">John Mugisha</div>
-            <div class="testi-role-new">Fashion Business Owner, Jinja</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card-new reveal-new">
-        <div class="testi-stars-new">★★★★★</div>
-        <p class="testi-text-new">"Real-time tracking and WhatsApp updates at every milestone. I always knew exactly where my cargo was. Highly professional service!"</p>
-        <div class="testi-author-new">
-          <div class="testi-av-new">RN</div>
-          <div>
-            <div class="testi-name-new">Ruth Namirembe</div>
-            <div class="testi-role-new">Importer, Mbarara</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CTA ══ -->
-  <section class="cta-new">
-    <div class="cta-new-inner reveal-new">
-      <h2>Ship From China. Track in Real Time.</h2>
-      <p>Every SI CARGO TRACKER client gets a live tracking number — know where your cargo is at every milestone, from Guangzhou to Kampala.</p>
-      <div class="cta-btns">
-        <a href="tracking.html" class="btn-cta-white">Track Your Cargo</a>
-        <a href="contact.html" class="btn-cta-outline">Talk to Our Team</a>
       </div>
     </div>
   </section>

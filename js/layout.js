@@ -40,17 +40,26 @@ const FOOTER_HTML = `
 
 <footer role="contentinfo">
   <div class="footer-top">
-    <div class="footer-brand">
-      <div class="nav-logo" style="margin-bottom:16px;">
-        <div class="logo-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/>
-          </svg>
-        </div>
-        <div class="brand" style="color:white;">SI <span>CARGO</span> UGANDA</div>
-      </div>
-      <p>Your trusted logistics partner for shipping goods from China to Uganda — fast, safe, and affordable.</p>
+   <div class="footer-brand">
+
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+
+    <img src="si.jpg"
+         alt="SI Cargo Uganda Logo"
+         style="width:45px;height:45px;object-fit:contain;">
+
+    <div class="brand" style="color:white;">
+      SI <span>CARGO</span> UGANDA
     </div>
+
+  </div>
+
+  <p>
+    Your trusted logistics partner for shipping goods from China to Uganda.
+    Fast, Safe, and Affordable.
+  </p>
+
+</div>
     <div class="footer-col">
       <h4>Navigation</h4>
       <ul>

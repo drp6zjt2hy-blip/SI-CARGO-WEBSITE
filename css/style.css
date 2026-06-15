@@ -91,6 +91,11 @@ img { display: block; max-width: 100%; }
 .nav-logo .logo-icon svg { width: 20px; height: 20px; fill: white; }
 .nav-logo .brand { color: var(--charcoal); }
 .nav-logo .brand span { color: var(--orange); }
+.footer-brand .logo-icon img{
+  width:45px;
+  height:45px;
+  object-fit:contain;
+}
 
 .nav-links {
   display: flex;
