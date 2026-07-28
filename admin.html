@@ -350,11 +350,13 @@
   <div class="admin-body">
     <div class="nb-banner">📌 <strong>NB:</strong> ETA = Expected Time of Arrival — the estimated date cargo reaches that location.</div>
 
-    <div class="tab-buttons">
+   <div class="tab-buttons">
       <button class="tab-btn active" onclick="switchTab('add', this)">➕ Add Shipment</button>
       <button class="tab-btn" onclick="switchTab('update', this)">✏️ Update Status</button>
+      <button class="tab-btn" onclick="switchTab('bulk', this)">🚢 Bulk Container Update</button>
       <button class="tab-btn" onclick="switchTab('all', this)">📦 All Shipments</button>
     </div>
+
 
     <!-- ══ TAB 1: ADD SHIPMENT ══ -->
     <div class="tab-content active" id="tab-add">
@@ -475,8 +477,9 @@
           <div class="form-row">
             <div class="form-group">
               <label>Client Name</label>
-              <input type="text" id="upd_client" disabled>
+              <input type="text" id="upd_client">
             </div>
+
             <div class="form-group">
               <label>Container Number</label>
               <input type="text" id="upd_container_number">
@@ -526,6 +529,75 @@
         </div>
       </div>
     </div>
+
+    <!-- ══ TAB 3: BULK CONTAINER UPDATE ══ -->
+<div class="tab-content" id="tab-bulk">
+  <div class="card">
+    <h3>Bulk Container Update</h3>
+    <p style="font-size:13.5px;color:var(--text-dim);margin-bottom:24px;">Select a container number to update the status and notes for all shipments inside it at the same time.</p>
+
+    <!-- Step 1: Pick container -->
+    <div class="form-group">
+      <label>Container Number <span class="req">*</span></label>
+      <select id="bulk_container" onchange="loadBulkContainer()">
+        <option value="">— Select a container —</option>
+      </select>
+    </div>
+
+    <div id="bulkPreview" style="display:none;">
+
+      <!-- Shipments in this container -->
+      <div style="margin-bottom:24px;padding:16px;background:rgba(249,115,22,0.06);border:1px solid var(--border-orange);border-radius:10px;">
+        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:12px;">Shipments in this container</div>
+        <div id="bulkShipmentList" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+
+      <!-- Fields to update -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>New Status for ALL <span class="req">*</span></label>
+          <select id="bulk_status">
+            <option value="Received at Warehouse">Received at Warehouse</option>
+            <option value="Loaded">Loaded</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Arrived at Mombasa">Arrived at Mombasa</option>
+            <option value="In Transit to ICD/Bond">In Transit to ICD/Bond</option>
+            <option value="At Malaba Border">At Malaba Border</option>
+            <option value="At ICD/Bond">At ICD/Bond</option>
+            <option value="Container Opened">Container Opened</option>
+            <option value="Surrendering Transfer Forms">Surrendering Transfer Forms</option>
+            <option value="Customs Clearing">Customs Clearing</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Current Location for ALL</label>
+          <input type="text" id="bulk_location" placeholder="e.g. Mombasa Port">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>ETA to Mombasa for ALL</label>
+          <input type="text" id="bulk_eta_mombasa" placeholder="e.g. 25 Dec 2026">
+        </div>
+        <div class="form-group">
+          <label>ETA to ICD/Bond for ALL</label>
+          <input type="text" id="bulk_eta_icd" placeholder="e.g. 10 Jan 2027">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes for ALL clients</label>
+        <textarea id="bulk_notes" placeholder="This note will appear for every shipment in this container..."></textarea>
+      </div>
+
+      <button class="submit-btn" id="bulkBtn" onclick="applyBulkUpdate()">
+        Update All Shipments in Container →
+      </button>
+      <div class="alert" id="bulkAlert"></div>
+    </div>
+  </div>
+</div>
 
     <!-- ══ TAB 3: ALL SHIPMENTS — CONTAINER VIEW ══ -->
     <div class="tab-content" id="tab-all">
@@ -649,7 +721,9 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + tab).classList.add('active');
     el.classList.add('active');
-    if (tab === 'all') loadShipments();
+   if (tab === 'all') loadShipments();
+if (tab === 'bulk') { loadShipments().then(() => populateBulkContainerDropdown()); }
+
   }
 
   /* ── STATUS BADGE ── */
@@ -759,6 +833,7 @@
     const alert    = document.getElementById('updateAlert');
     const tracking = document.getElementById('upd_tracking').value.trim();
     const data = {
+      client_name      : document.getElementById('upd_client').value.trim(),
       eta_mombasa      : document.getElementById('upd_eta_mombasa').value.trim(),
       eta_icd          : document.getElementById('upd_eta_icd').value.trim(),
       container_number : document.getElementById('upd_container_number').value.trim() || null,
@@ -770,6 +845,7 @@
       NO_CBM           : document.getElementById('upd_NO_CBM').value.trim() || null,
       no_of_packages   : document.getElementById('upd_no_of_packages').value.trim() || null,
     };
+
     try {
       await supabase('PATCH', 'TRACKING', data, `tracking_number=eq.${tracking}`);
       showAlert(alert, 'success', '✅ Status updated successfully!');
@@ -945,6 +1021,103 @@
     el.className = `alert ${type} show`;
     setTimeout(() => el.classList.remove('show'), 5000);
   }
+/* ── BULK CONTAINER UPDATE ── */
+function populateBulkContainerDropdown() {
+  const select = document.getElementById('bulk_container');
+  const containers = [...new Set(
+    allShipments
+      .filter(s => s.container_number && s.container_number.trim() !== '')
+      .map(s => s.container_number.trim().toUpperCase())
+  )].sort();
+
+  select.innerHTML = '<option value="">— Select a container —</option>';
+  containers.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = `📦 ${c} (${allShipments.filter(s => s.container_number && s.container_number.trim().toUpperCase() === c).length} shipments)`;
+    select.appendChild(opt);
+  });
+}
+
+function loadBulkContainer() {
+  const key = document.getElementById('bulk_container').value;
+  const preview = document.getElementById('bulkPreview');
+  if (!key) { preview.style.display = 'none'; return; }
+
+  const shipments = allShipments.filter(s =>
+    s.container_number && s.container_number.trim().toUpperCase() === key
+  );
+
+  document.getElementById('bulkShipmentList').innerHTML = shipments.map(s => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid var(--border);">
+      <div>
+        <span style="font-family:'Syne',sans-serif;font-size:13px;color:white;font-weight:700;">${s.tracking_number}</span>
+        <span style="font-size:12px;color:var(--text-dim);margin-left:10px;">${s.client_name}</span>
+      </div>
+      <span style="font-size:11px;color:var(--orange);">${s.status}</span>
+    </div>
+  `).join('');
+
+  // Pre-fill fields from first shipment
+  if (shipments.length > 0) {
+    document.getElementById('bulk_status').value = shipments[0].status;
+    document.getElementById('bulk_location').value = shipments[0].location || '';
+    document.getElementById('bulk_eta_mombasa').value = shipments[0].eta_mombasa || '';
+    document.getElementById('bulk_eta_icd').value = shipments[0].eta_icd || '';
+    document.getElementById('bulk_notes').value = shipments[0].notes || '';
+  }
+
+  preview.style.display = 'block';
+}
+
+async function applyBulkUpdate() {
+  const btn = document.getElementById('bulkBtn');
+  const alert = document.getElementById('bulkAlert');
+  const key = document.getElementById('bulk_container').value;
+  if (!key) { showAlert(alert, 'error', 'Please select a container first.'); return; }
+
+  const shipments = allShipments.filter(s =>
+    s.container_number && s.container_number.trim().toUpperCase() === key
+  );
+  if (shipments.length === 0) { showAlert(alert, 'error', 'No shipments found in this container.'); return; }
+
+  const confirmed = confirm(`Update ${shipments.length} shipment(s) in container ${key}?\n\nThis will apply the same status, location, ETA and notes to all of them.`);
+  if (!confirmed) return;
+
+  setButtonLoading(btn, 'Updating all...');
+
+  const data = {
+    status      : document.getElementById('bulk_status').value,
+    location    : document.getElementById('bulk_location').value.trim(),
+    eta_mombasa : document.getElementById('bulk_eta_mombasa').value.trim(),
+    eta_icd     : document.getElementById('bulk_eta_icd').value.trim(),
+    notes       : document.getElementById('bulk_notes').value.trim(),
+    last_updated: new Date().toISOString()
+  };
+
+  let successCount = 0;
+  for (const s of shipments) {
+    try {
+      await supabase('PATCH', 'TRACKING', data, `tracking_number=eq.${s.tracking_number}`);
+      successCount++;
+    } catch(e) {
+      console.error('Failed to update', s.tracking_number, e);
+    }
+  }
+
+  btn.textContent = 'Update All Shipments in Container →';
+  btn.disabled = false;
+
+  if (successCount === shipments.length) {
+    showAlert(alert, 'success', `✅ All ${successCount} shipments in container ${key} updated successfully!`);
+  } else {
+    showAlert(alert, 'error', `⚠️ ${successCount} of ${shipments.length} updated. Some failed — try again.`);
+  }
+
+  await loadShipments();
+  populateBulkContainerDropdown();
+  loadBulkContainer();
+}
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
