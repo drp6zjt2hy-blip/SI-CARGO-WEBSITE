@@ -14,7 +14,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#F97316">
@@ -23,7 +24,12 @@
 <meta name="apple-mobile-web-app-title" content="SI Cargo Uganda">
 <link rel="apple-touch-icon" href="si.jpg">
 
-  <link rel="preload" as="image" href="office6.jpg">
+  <link rel="preload" as="image" href="office6.webp">
+<link rel="preload" as="image" href="office1.webp">
+<link rel="preload" as="image" href="office8.webp">
+<link rel="preload" as="image" href="office4.webp">
+<link rel="preload" as="image" href="office5.webp">
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -92,14 +98,16 @@
       inset: 0;
       z-index: 0;
     }
-    .hero-slide {
+   .hero-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 1.2s ease;
+  will-change: opacity;
 }
+
 
 .hero-slide.active {
   opacity: 1;
@@ -120,21 +128,11 @@
     }
 
     /* Slides — replace these URLs with your own photos */
-    .hero-slide:nth-child(1) {
-      background-image: url('office6.jpg');
-    }
-    .hero-slide:nth-child(2) {
-      background-image: url('office1.jpg');
-    }
-    .hero-slide:nth-child(3) {
-      background-image: url('office8.jpg');
-    }
-    .hero-slide:nth-child(4) {
-      background-image: url('office4.jpg');
-    }
-    .hero-slide:nth-child(5) {
-      background-image: url('office5.jpg');
-    }
+    .hero-slide:nth-child(1) { background-image: url('office6.webp'); }
+.hero-slide:nth-child(2) { background-image: url('office1.webp'); }
+.hero-slide:nth-child(3) { background-image: url('office8.webp'); }
+.hero-slide:nth-child(4) { background-image: url('office4.webp'); }
+.hero-slide:nth-child(5) { background-image: url('office5.webp'); }
 
     /* Slide dots */
     .hero-dots {
