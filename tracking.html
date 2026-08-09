@@ -9,6 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F97316">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SI Cargo Uganda">
+<link rel="apple-touch-icon" href="si.jpg">
+
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -607,7 +614,7 @@
     errMsg.style.display = 'none';
 
     if (!val) {
-      errMsg.textContent   = '⚠️ Please enter a tracking number.';
+      errMsg.textContent   = '‼️ Please enter a tracking number.';
       errMsg.style.display = 'block';
       return;
     }
@@ -631,14 +638,14 @@
         document.getElementById('cargoResult').innerHTML = buildTrackingCard(s);
         section.scrollIntoView({ behavior: 'smooth' });
       } else {
-        errMsg.textContent   = `❌ Tracking number "${val}" not found. Please check the number or contact us.`;
+        errMsg.textContent   = `‼️Tracking number "${val}" not found. Please check the number or contact us.`;
         errMsg.style.display = 'block';
         section.style.display = 'none';
       }
     } catch(e) {
       btn.disabled = false;
       btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Track Now`;
-      errMsg.textContent   = '⚠️ Connection error. Please try again.';
+      errMsg.textContent   = '‼️ Connection error. Please try again.';
       errMsg.style.display = 'block';
     }
   }
@@ -740,5 +747,13 @@
       </div>`;
   }
 </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+
 </body>
 </html>

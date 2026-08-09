@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Cargo — SI CARGO UGANDA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F97316">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SI Cargo Uganda">
+<link rel="apple-touch-icon" href="si.jpg">
+
+  <style>
+    .reg-section { padding: 70px 6%; background: var(--off-white); }
+
+.warehouse-info {
+  background: linear-gradient(135deg, var(--charcoal), #27272a);
+  border-radius: 20px;
+  padding: 36px 40px;
+  margin-bottom: 50px;
+  border: 1px solid rgba(249,115,22,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.warehouse-info::before {
+  content: '🏭';
+  position: absolute;
+  right: 30px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 80px;
+  opacity: 0.12;
+}
+.warehouse-info h3 {
+  font-size: 22px;
+  color: white;
+  margin-bottom: 10px;
+}
+.warehouse-info p {
+  color: rgba(255,255,255,0.65);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 680px;
+}
+.warehouse-address {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.wa-item { display: flex; align-items: flex-start; gap: 10px; }
+.wa-icon {
+  width: 34px; height: 34px;
+  background: rgba(249,115,22,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.wa-item span { font-size: 13px; color: rgba(255,255,255,0.45); display: block; }
+.wa-item strong { font-size: 14px; color: white; }
+
+/* Form section headings */
+.form-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-900);
+  padding: 14px 0 12px;
+  border-bottom: 2px solid var(--gray-100);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form-section-title .fsn {
+  width: 28px; height: 28px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.cargo-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.cargo-type-option { display: none; }
+.cargo-type-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  background: var(--gray-50);
+}
+.cargo-type-label:hover {
+  border-color: var(--orange);
+  background: var(--orange-glow);
+}
+.cargo-type-option:checked + .cargo-type-label {
+  border-color: var(--orange);
+  background: rgba(249,115,22,0.08);
+  color: var(--orange);
+  font-weight: 600;
+}
+.cargo-type-label .ct-icon { font-size: 28px; }
+.cargo-type-label .ct-name { font-size: 13px; font-weight: 500; color: var(--gray-700); }
+.cargo-type-option:checked + .cargo-type-label .ct-name { color: var(--orange); }
+
+.upload-section {
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 24px;
+  background: var(--gray-50);
+  margin-bottom: 20px;
+}
+.upload-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.upload-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.upload-section-header div h4 {
+  font-size: 15px;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+.upload-section-header div p {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+.terms-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+}
+.terms-check input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.terms-check span {
+  font-size: 13.5px;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+.terms-check a { color: var(--orange); font-weight: 600; }
+
+.reg-form-card button[type="submit"] {
+  width: 100%;
+  justify-content: center;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+}
+
+.form-note {
+  font-size: 13px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  justify-content: center;
+}
+
+@keyframes routeProgress {
+  from { width: 0; }
+  to { width: 80%; }
+}
+
+@keyframes moveRoute {
+  from { left: 10%; }
+  to { left: 90%; }
+}
+
+@keyframes pulse-stop {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(249,115,22,0); }
+}
+
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+
+
+
+<main>
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Cargo Registration</span>
+      </div>
+      <h1>Register Your Cargo</h1>
+      <p>Tell your supplier in China to send goods to our warehouse, then register here.</p>
+    </div>
+  </div>
+
+  <section class="reg-section">
+    <!-- WAREHOUSE INFO BANNER -->
+    <div class="warehouse-info reveal">
+      <h3>📦 Our China Warehouse Address</h3>
+      <p>Instruct your Chinese supplier to deliver goods to our warehouse using the address below. Once received, our team inspects and prepares your cargo. Then complete the registration form to initiate your shipment to Uganda.</p>
+      <div class="warehouse-address">
+        <div class="wa-item">
+          <div class="wa-icon">📍</div>
+          <div>
+            <span>Warehouse Address</span>
+            <strong>SI CARGO, Guangzhou, Guangdong Province, China</strong>
+          </div>
+        </div>
+        <div class="wa-item">
+          <div class="wa-icon">📞</div>
+          <div>
+            <span>China Contact</span>
+            <strong>+86 XXX XXXX XXXX</strong>
+          </div>
+        </div>
+        <div class="wa-item">
+          <div class="wa-icon">⏰</div>
+          <div>
+            <span>Receiving Hours</span>
+            <strong>Mon–Sat, 8:00 AM – 5:00 PM CST</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="registration-layout">
+  <!-- LEFT: STEPS -->
+  <div class="reg-info reveal">
+    <span class="section-tag">How to Register</span>
+    <h2>4 Easy Steps to Ship Your Goods</h2>
+    <p>Once your supplier delivers to our China warehouse, follow these steps to get your cargo moving to Uganda.</p>
+
+    <div class="reg-steps">
+      <div class="reg-step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Deliver to Our China Warehouse</h4>
+          <p>Tell your supplier to ship to our Guangzhou warehouse address above and obtain a delivery note / receipt.</p>
+        </div>
+      </div>
+      <div class="reg-step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Fill in This Registration Form</h4>
+          <p>Provide your contact details, cargo description, weight, and choose your preferred shipping method.</p>
+        </div>
+      </div>
+      <div class="reg-step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Upload Your Delivery Note</h4>
+          <p>Attach the proof of delivery / delivery note from your supplier as confirmation your goods arrived at our warehouse.</p>
+        </div>
+      </div>
+      <div class="reg-step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>We Confirm & Ship</h4>
+          <p>Our team reviews your registration, confirms cargo receipt, and arranges shipment to Uganda. We'll keep you updated throughout.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;padding:20px;background:rgba(249,115,22,0.07);border-radius:12px;border:1px solid rgba(249,115,22,0.2);">
+      <strong style="font-size:14px;color:var(--gray-900);">📌 Important Note</strong>
+      <p style="font-size:13.5px;color:var(--gray-600);margin-top:6px;line-height:1.7;">
+        Always mark your packages clearly with your <strong>Full Name</strong> and <strong>Phone Number</strong> so our China team can identify your goods on arrival. Unidentified packages may be delayed.
+      </p>
+    </div>
+  </div>
+      <!-- ANIMATED SHIPPING VISUAL -->
+    <div style="margin-top:36px;background:linear-gradient(135deg,var(--charcoal),#27272a);border-radius:20px;padding:28px 24px;border:1px solid rgba(249,115,22,0.15);overflow:hidden;position:relative;">
+      
+      <!-- Glow background -->
+      <div style="position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(249,115,22,0.12) 0%,transparent 70%);top:-100px;right:-80px;pointer-events:none;"></div>
+
+      <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Live Shipping Route</div>
+
+      <!-- ROUTE ANIMATION -->
+      <div style="position:relative;padding:20px 0;">
+        
+        <!-- Route line -->
+        <div style="position:absolute;top:50%;left:10%;right:10%;height:2px;background:rgba(255,255,255,0.08);transform:translateY(-50%);border-radius:2px;"></div>
+        
+        <!-- Animated progress line -->
+        <div style="position:absolute;top:50%;left:10%;width:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-light));transform:translateY(-50%);border-radius:2px;animation:routeProgress 3s ease-in-out infinite alternate;"></div>
+
+        <!-- Animated cargo truck/plane -->
+        <div style="position:absolute;top:50%;left:10%;transform:translate(-50%,-50%);font-size:22px;animation:moveRoute 3s ease-in-out infinite alternate;">✈️</div>
+
+        <!-- Stop points -->
+        <div style="display:flex;justify-content:space-between;padding:0 10%;position:relative;z-index:1;">
+          
+          <div style="text-align:center;animation:fadeUp 0.6s ease both;">
+            <div style="width:44px;height:44px;background:rgba(249,115,22,0.15);border:2px solid var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px;animation:pulse-stop 2s infinite;">🏭</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.5px;">GUANGZHOU</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">China</div>
+          </div>
+
+          <div style="text-align:center;animation:fadeUp 0.6s 0.2s ease both;">
+            <div style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px;">⚓</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.5px;">MOMBASA</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Kenya</div>
+          </div>
+
+          <div style="text-align:center;animation:fadeUp 0.6s 0.4s ease both;">
+            <div style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px;">🏗</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.5px;">ICD/BOND</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Uganda</div>
+          </div>
+
+          <div style="text-align:center;animation:fadeUp 0.6s 0.6s ease both;">
+            <div style="width:44px;height:44px;background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 10px;">🏠</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.5px;">KAMPALA</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Uganda</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STATS ROW -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">5–10</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;">Days Air Freight</div>
+        </div>
+        <div style="text-align:center;border-left:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">16–25</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;">Days Sea Freight</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--orange);">24/7</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;">Support Available</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="reg-form-card reveal">
+
+
+  <!-- RIGHT: FORM -->
+  <div class="reg-form-card reveal">
+    <form id="regForm" novalidate>
+
+      <!-- SECTION 1: Personal Info -->
+      <div class="form-section-title">
+        <div class="fsn">1</div>
+        Your Contact Information
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" placeholder="e.g. Aisha Kamukama" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+256 700 000 000" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="location">Delivery Location in Uganda *</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Kampala, Jinja, Mbarara" required>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Cargo Details -->
+      <div class="form-section-title" style="margin-top:10px;">
+        <div class="fsn">2</div>
+        Cargo Details
+      </div>
+
+      <div class="form-group">
+        <label>Cargo Type *</label>
+        <div class="cargo-type-grid">
+          <div>
+            <input type="radio" name="cargoType" id="ct-electronics" value="Electronics" class="cargo-type-option">
+            <label for="ct-electronics" class="cargo-type-label">
+              <span class="ct-icon">📱</span>
+              <span class="ct-name">Electronics</span>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="cargoType" id="ct-clothing" value="Clothing" class="cargo-type-option">
+            <label for="ct-clothing" class="cargo-type-label">
+              <span class="ct-icon">👗</span>
+              <span class="ct-name">Clothing & Textiles</span>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="cargoType" id="ct-machinery" value="Machinery" class="cargo-type-option">
+            <label for="ct-machinery" class="cargo-type-label">
+              <span class="ct-icon">⚙️</span>
+              <span class="ct-name">Machinery</span>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="cargoType" id="ct-food" value="Food" class="cargo-type-option">
+            <label for="ct-food" class="cargo-type-label">
+              <span class="ct-icon">🍜</span>
+              <span class="ct-name">Food Products</span>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="cargoType" id="ct-other" value="Other" class="cargo-type-option">
+            <label for="ct-other" class="cargo-type-label">
+              <span class="ct-icon">📦</span>
+              <span class="ct-name">Other</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="weight">Estimated Weight (kg)</label>
+          <input type="number" id="weight" name="weight" placeholder="e.g. 25" min="0.1">
+        </div>
+        <div class="form-group">
+          <label for="pieces">Number of Pieces / Packages</label>
+          <input type="number" id="pieces" name="pieces" placeholder="e.g. 3" min="1">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Cargo Description *</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe your goods in detail: type, quantity, brand, value. e.g. '10 Samsung Galaxy S24 phones, 5 Xiaomi tablets, 2 laptop bags — total value approx. $2,000'" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="supplierName">Supplier / Sender Name (China)</label>
+        <input type="text" id="supplierName" name="supplierName" placeholder="Name of your Chinese supplier or sender">
+      </div>
+
+      <!-- SECTION 3: Shipping -->
+      <div class="form-section-title" style="margin-top:10px;">
+        <div class="fsn">3</div>
+        Shipping Preferences
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="shippingMethod">Shipping Method *</label>
+          <select id="shippingMethod" name="shippingMethod" required>
+            <option value="">Select method</option>
+            <option value="air">✈️ Air Freight (5–10 days)</option>
+            <option value="sea">🚢 Sea Freight (16–25 days)</option>
+            <option value="d2d">🚚 Door-to-Door Delivery</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="urgency">Priority</label>
+          <select id="urgency" name="urgency">
+            <option value="standard">Standard</option>
+            <option value="express">Express (Air only)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Any special handling instructions, fragile items, or notes for our team..."></textarea>
+      </div>
+
+      <!-- SECTION 4: Delivery Note Upload -->
+      <div class="form-section-title" style="margin-top:10px;">
+        <div class="fsn">4</div>
+        Upload Delivery Note / Proof of Shipment
+      </div>
+
+      <div class="upload-section">
+        <div class="upload-section-header">
+          <span class="upload-badge">REQUIRED</span>
+          <div>
+            <h4>Delivery Note from Your Supplier</h4>
+            <p>Upload the delivery note, receipt, or any proof that your goods have been sent to our China warehouse. This is required for us to confirm receipt and process your cargo. Accepted: PDF, JPG, PNG, DOCX (max 10 MB).</p>
+          </div>
+        </div>
+
+        <div class="upload-zone" id="deliveryNote" role="button" tabindex="0" aria-label="Upload delivery note">
+          <input type="file" name="deliveryNote" accept=".pdf,.jpg,.jpeg,.png,.docx" aria-label="Upload delivery note file">
+          <span class="upload-icon">📄</span>
+          <p><strong>Click to upload</strong> or drag & drop your delivery note</p>
+          <span>PDF, JPG, PNG or DOCX — max 10 MB</span>
+        </div>
+
+        <div class="upload-preview" id="deliveryPreview">
+          <span class="file-icon">📄</span>
+          <div class="file-info">
+            <span class="file-name" id="deliveryName"></span>
+            <span class="file-size" id="deliverySize"></span>
+          </div>
+          <button type="button" class="remove-file" id="removeDelivery" aria-label="Remove file">✕</button>
+        </div>
+      </div>
+
+      <!-- TERMS -->
+      <label class="terms-check">
+        <input type="checkbox" id="terms" name="terms" required>
+        <span>I confirm that the information provided is accurate and I agree to SI CARGO UGANDA's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that registration does not guarantee shipment until cargo is verified at the warehouse.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary" style="margin-top:24px;">
+        Register Cargo
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+
+      <p class="form-note">
+        🔒 Your data is encrypted and securely processed.
+      </p>
+    </form>
+
+    <div class="success-banner" id="successBanner" role="alert">
+      <span class="check">✅</span>
+      <div>
+        <strong>Registration Successful!</strong><br>
+        Our team will review your submission and contact you within 24 hours to confirm cargo receipt and shipping details.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </section>
+</main>
+
+
+
+
+
+
+<div id="foot-placeholder"></div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelector('.nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', function() {
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script>
+  var currentFile = window.location.pathname.split('/').pop();
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (href === currentFile) {
+      link.classList.add('active');
+    }
+    if (currentFile === '' || currentFile === 'index.html') {
+      if (href === 'index.html') {
+        link.classList.add('active');
+      }
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var hamburger = document.querySelector('.hamburger');
+    var navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+        var isOpen = navLinks.classList.contains('open');
+        var spans = hamburger.querySelectorAll('span');
+        if (isOpen) {
+          spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+          spans[1].style.opacity = '0';
+          spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+        } else {
+          spans[0].style.transform = '';
+          spans[1].style.opacity = '';
+          spans[2].style.transform = '';
+        }
+      });
+    }
+  });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -4,6 +4,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SI CARGO UGANDA — Admin Panel</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F97316">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SI Cargo Uganda">
+<link rel="apple-touch-icon" href="si.jpg">
+
   <style>
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes cargoMove { 0% { left:-40%; } 100% { left:100%; } }
@@ -1126,5 +1133,13 @@ async function applyBulkUpdate() {
     }
   });
 </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
+</script>
+
 </body>
 </html>

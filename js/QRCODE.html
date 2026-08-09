@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SI CARGO UGANDA — QR Code</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0A0A0C;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+    h1 span { color: #F97316; }
+
+    /* ── THE CARD THAT GETS DOWNLOADED ── */
+    .qr-card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 36px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 360px;
+      box-shadow: 0 20px 60px rgba(249,115,22,0.15), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-logo-box {
+      width: 44px; height: 44px;
+      background: #F97316;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .card-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #0A0A0C;
+      letter-spacing: -0.3px;
+    }
+    .card-logo-text span { color: #F97316; }
+
+    .card-tagline {
+      font-size: 13px;
+      color: #6B7280;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+    /* QR wrapper with orange border */
+    .qr-wrap {
+      padding: 14px;
+      border: 3px solid #F97316;
+      border-radius: 16px;
+      background: white;
+      position: relative;
+    }
+    /* Corner accents */
+    .qr-wrap::before, .qr-wrap::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+    }
+    .qr-wrap::before {
+      top: -4px; left: -4px;
+      border-top: 4px solid #EA580C;
+      border-left: 4px solid #EA580C;
+      border-radius: 4px 0 0 0;
+    }
+    .qr-wrap::after {
+      bottom: -4px; right: -4px;
+      border-bottom: 4px solid #EA580C;
+      border-right: 4px solid #EA580C;
+      border-radius: 0 0 4px 0;
+    }
+
+    #qrcode canvas, #qrcode img {
+      display: block;
+      border-radius: 4px;
+    }
+
+    .card-url {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #F97316;
+      letter-spacing: 0.3px;
+    }
+
+    .card-divider {
+      width: 100%;
+      height: 1px;
+      background: #F3F4F6;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .card-footer-left {
+      font-size: 11px;
+      color: #9CA3AF;
+      line-height: 1.6;
+    }
+    .card-footer-left strong { color: #374151; font-weight: 600; }
+    .card-scan-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #FEF3E8;
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #EA580C;
+      white-space: nowrap;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: #F97316;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #EA580C;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.4);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.06);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    .hint {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .hint strong { color: rgba(255,255,255,0.7); }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <h1>SI <span>CARGO</span> UGANDA<br>QR Code</h1>
+
+  <!-- THE CARD -->
+  <div class="qr-card" id="qrCard">
+
+    <div class="card-logo">
+      <div class="card-logo-box">📦</div>
+      <div class="card-logo-text">SI <span>CARGO</span> UGANDA</div>
+    </div>
+
+    <p class="card-tagline">Scan to track your cargo from China to Uganda in real-time</p>
+
+    <div class="qr-wrap">
+      <div id="qrcode"></div>
+    </div>
+
+    <div class="card-url">sicargoug.com</div>
+
+    <div class="card-divider"></div>
+
+    <div class="card-footer">
+      <div class="card-footer-left">
+        <strong>📍 Tracking</strong><br>
+        China → Uganda
+      </div>
+      <div class="card-scan-badge">
+        📱 Scan Me
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="downloadPNG()">
+      ⬇️ Download PNG
+    </button>
+    <button class="btn btn-ghost" onclick="window.print()">
+      🖨️ Print
+    </button>
+  </div>
+
+  <p class="hint">
+    <strong>Works on paper:</strong> anyone can scan with their phone camera.<br>
+    <strong>On phone:</strong> long press the QR code image to open the link.
+  </p>
+
+</div>
+
+<script>
+  const SITE_URL = 'https://sicargoug.com';
+
+  // Generate QR code
+  const qr = new QRCode(document.getElementById('qrcode'), {
+    text: SITE_URL,
+    width: 200,
+    height: 200,
+    colorDark: '#0A0A0C',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H  // H = highest error correction — works even if slightly damaged when printed
+  });
+
+  // Download as PNG
+  function downloadPNG() {
+    setTimeout(() => {
+      const canvas = document.querySelector('#qrcode canvas');
+      if (!canvas) { alert('QR still generating, try again in 1 second.'); return; }
+
+      // Create a bigger canvas for the full card
+      const out = document.createElement('canvas');
+      out.width = 700;
+      out.height = 820;
+      const ctx = out.getContext('2d');
+
+      // White background + rounded card
+      ctx.fillStyle = '#F9FAFB';
+      ctx.fillRect(0, 0, out.width, out.height);
+
+      // Card background
+      ctx.fillStyle = '#ffffff';
+      roundRect(ctx, 40, 40, 620, 740, 24);
+      ctx.fill();
+
+      // Orange top bar
+      ctx.fillStyle = '#F97316';
+      roundRect(ctx, 40, 40, 620, 8, [24, 24, 0, 0]);
+      ctx.fill();
+
+      // Brand text
+      ctx.fillStyle = '#0A0A0C';
+      ctx.font = 'bold 28px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('SI CARGO UGANDA', 350, 130);
+
+      // Tagline
+      ctx.fillStyle = '#6B7280';
+      ctx.font = '16px Arial';
+      ctx.fillText('Scan to track your cargo from China to Uganda', 350, 165);
+
+      // Draw the QR code
+      ctx.drawImage(canvas, 200, 200, 300, 300);
+
+      // Orange border around QR
+      ctx.strokeStyle = '#F97316';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      roundRect(ctx, 186, 186, 328, 328, 12);
+      ctx.stroke();
+
+      // URL text
+      ctx.fillStyle = '#F97316';
+      ctx.font = 'bold 20px Arial';
+      ctx.fillText('sicargoug.com', 350, 560);
+
+      // Divider
+      ctx.strokeStyle = '#F3F4F6';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(80, 590); ctx.lineTo(620, 590);
+      ctx.stroke();
+
+      // Footer text
+      ctx.fillStyle = '#374151';
+      ctx.font = 'bold 15px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText('📍 Tracking: China → Uganda', 80, 630);
+
+      ctx.fillStyle = '#9CA3AF';
+      ctx.font = '13px Arial';
+      ctx.fillText('Real-time cargo tracking for every client', 80, 655);
+
+      // Scan badge
+      ctx.fillStyle = '#FEF3E8';
+      roundRect(ctx, 460, 610, 160, 36, 99);
+      ctx.fill();
+      ctx.fillStyle = '#EA580C';
+      ctx.font = 'bold 13px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('📱 Scan Me', 540, 633);
+
+      // Footer copyright
+      ctx.fillStyle = '#9CA3AF';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('SI CARGO UGANDA © 2026 — sicargoug.com', 350, 760);
+
+      // Download
+      const link = document.createElement('a');
+      link.download = 'SI-CARGO-UGANDA-QR.png';
+      link.href = out.toDataURL('image/png');
+      link.click();
+    }, 500);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    if (typeof r === 'number') r = [r, r, r, r];
+    ctx.beginPath();
+    ctx.moveTo(x + r[0], y);
+    ctx.lineTo(x + w - r[1], y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r[1]);
+    ctx.lineTo(x + w, y + h - r[2]);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r[2], y + h);
+    ctx.lineTo(x + r[3], y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r[3]);
+    ctx.lineTo(x, y + r[0]);
+    ctx.quadraticCurveTo(x, y, x + r[0], y);
+    ctx.closePath();
+  }
+</script>
+
+</body>
+</html>

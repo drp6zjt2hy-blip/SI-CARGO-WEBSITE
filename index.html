@@ -16,6 +16,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F97316">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SI Cargo Uganda">
+<link rel="apple-touch-icon" href="si.jpg">
+
   <link rel="preload" as="image" href="office6.jpg">
   <script type="application/ld+json">
 {
@@ -91,12 +98,12 @@
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 0.8s transform 3s ease;
+  transition: opacity 0.8s ease;
 }
 
 .hero-slide.active {
   opacity: 1;
-  animation: zoomMove 8s ease-in-out forwards;
+ animation: zoomMove 5s ease-in-out forwards;
 }
 
 @keyframes zoomMove {
@@ -1011,17 +1018,18 @@
 <script>
   /* ══ HERO SLIDESHOW ══ */
 
+/* ══ HERO SLIDESHOW ══ */
+
 const slides = document.querySelectorAll('.hero-slide');
 const dots = document.querySelectorAll('.hero-dot');
 
 let currentSlide = 0;
+let slideInterval;
 
 function showSlide(index) {
-  // Remove active class from all slides and dots
   slides.forEach(slide => slide.classList.remove('active'));
   dots.forEach(dot => dot.classList.remove('active'));
 
-  // Activate current slide and dot
   slides[index].classList.add('active');
   dots[index].classList.add('active');
 
@@ -1029,31 +1037,24 @@ function showSlide(index) {
 }
 
 function nextSlide() {
-  let next = currentSlide + 1;
-
-  if (next >= slides.length) {
-    next = 0;
-  }
-
+  const next = (currentSlide + 1) % slides.length;
   showSlide(next);
 }
 
 function goToSlide(index) {
   showSlide(index);
+
+  // Reset the timer after manually selecting a slide
+  clearInterval(slideInterval);
+  startSlideshow();
 }
 
-// Auto slide every 3 seconds
-let slideInterval = setInterval(nextSlide, 3000);
+function startSlideshow() {
+  slideInterval = setInterval(nextSlide, 5000);
+}
 
-// Pause when mouse enters hero section
-document.querySelector('.hero-new').addEventListener('mouseenter', () => {
-  clearInterval(slideInterval);
-});
-
-// Resume when mouse leaves
-document.querySelector('.hero-new').addEventListener('mouseleave', () => {
-  slideInterval = setInterval(nextSlide, 3000);
-});
+// Start automatically
+startSlideshow();
   /* ══ SCROLL REVEAL ══ */
   window.addEventListener('load', function() {
     var currentFile = window.location.pathname.split('/').pop();
@@ -1076,6 +1077,13 @@ document.querySelector('.hero-new').addEventListener('mouseleave', () => {
     }, { threshold: 0.1 });
     revealEls.forEach(function(el) { revealObserver.observe(el); });
   });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js');
+    });
+  }
 </script>
 
 </body>
